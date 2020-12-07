@@ -6,13 +6,13 @@ from emcee.utils import MPIPool
 
 ######### here are the weights for each source redshift to match COSMOS pz
 
-zs_tng = array([0.034, 0.07 , 0.105, 0.142, 0.179, 0.216, 0.255, 0.294, 0.335,
+zs_tng = np.array([0.034, 0.07 , 0.105, 0.142, 0.179, 0.216, 0.255, 0.294, 0.335,
        0.376, 0.418, 0.462, 0.506, 0.552, 0.599, 0.648, 0.698, 0.749,
        0.803, 0.858, 0.914, 0.973, 1.034, 1.097, 1.163, 1.231, 1.302,
        1.375, 1.452, 1.532, 1.615, 1.703, 1.794, 1.889, 1.989, 2.094,
        2.203, 2.319, 2.44 , 2.568])
 
-weights = array([0.0025972 , 0.00282821, 0.00547208, 0.00394597, 0.0065455 ,
+weights = np.array([0.0025972 , 0.00282821, 0.00547208, 0.00394597, 0.0065455 ,
        0.00995475, 0.00816962, 0.01029778, 0.01376537, 0.01401739,
        0.01235127, 0.01561818, 0.01502547, 0.01662392, 0.02416116,
        0.02685403, 0.030863  , 0.03450561, 0.02412149, 0.03820889,
@@ -39,16 +39,12 @@ def cosmos_kappa_gen(LP, run):
         kappa_cosmos += weights[iz-1]*kappa_gen(LP, run, iz)
     return kappa_cosmos  
 
-
 def mass_product (counter):
     '''counter=(LP-1)*100+run'''
     run = counter%100
     if run ==0:
         run = 100
-        LP = int((counter - run)/100)+1
-    else:
-        LP = int((counter - run)/100)+1
-#s    return LP, run
+    LP = int((counter - run)/100)+1
     fn = '/global/cscratch1/sd/jialiu/kappaTNG/COSMOS/kappa%i.npy' % (counter)
     if not os.path.isfile(fn):
         print (fn)
