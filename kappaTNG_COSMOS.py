@@ -59,4 +59,4 @@ if not pool.is_master():
 out=pool.map(mass_product, np.arange(1, 10001))
 pool.close()
 
-print 'DONE-DONE-DONE'
+print ('DONE-DONE-DONE')
